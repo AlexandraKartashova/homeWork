@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>ToDo List</title>
+ </head>
+ <body>
+    <!-- <div class="input">
+        <input type="text" id="name-author" placeholder="Name Author"> <br>
+        <input type="date" id="date-created" placeholder="Date Created"> <br>
+        <input type="text" id="to-do" placeholder="To Do">
+    </div>
+    <br>
+    <br>
+    <div class="btn">
+        <button id="add">Add</button>
+        <button id="edit">Edit</button>
+        <button id="del">Delete</button>
+    </div> -->
+
+    <table border="1" id="table">
+        <caption>Create ToDo list</caption>
+        <tr>
+         <th>Name Author</th>
+         <th>Date Created</th>
+         <th>To Do</th>
+         <th>Click</th>
+
+        </tr>
+        <tr>
+            <td><input type="text" id="name-author" placeholder="Name Author"></td>
+            <td><input type="date" id="date-created" placeholder="Date Created"> <br></td>
+            <td><input type="text" id="to-do" placeholder="To Do"></td>
+            <td><button id="add">Add</button></td>
+        </tr>
+       </table>
+
+        <button id="edit" class="hidden btn">Edit</button>
+        <button id="del" class="hidden btn">Delete</button>
+       
+    <script src="./js/script.js"></script>
+    <style src="./style/style.css"></style>
+ </body>
+</html>
