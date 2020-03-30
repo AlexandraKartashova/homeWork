@@ -34,7 +34,7 @@ add.onclick = () => {
 
 const addRow = () => {
 	let tableRef = document.getElementById('table');
-	let newRow = tableRef.insertRow(0);
+	let newRow = tableRef.insertRow(-1);
 	let newCell = newRow.insertCell(0);
 	let newText = document.createTextNode(document.getElementById('name-author').value);
 	newCell.appendChild(newText);
