@@ -25,16 +25,18 @@
          <th>Name Author</th>
          <th>Date Created</th>
          <th>To Do</th>
-         <th>Click</th>
+         <th class="click">Click</th>
 
         </tr>
         <tr>
             <td><input type="text" id="name-author" placeholder="Name Author"></td>
             <td><input type="date" id="date-created" placeholder="Date Created"> <br></td>
             <td><input type="text" id="to-do" placeholder="To Do"></td>
-            <td><button id="add">Add</button>
-                <button id="edit" class="hidden btn">Edit</button>
-                <button id="del" class="hidden btn">Delete</button>
+            <td><button id="add" class="btn-add btn">Add</button>
+                <div class="div-btn hidden" id="div-btn">
+                    <button id="edit" class="btn-edit btn">Edit</button>
+                    <button id="del" class="btn-del btn">Delete</button>
+                </div>
             </td>
         </tr>
        </table>

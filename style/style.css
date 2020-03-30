@@ -1,7 +1,31 @@
-.btn{
-    color: red;
-    margin-top: 10px;
-    }
+.click {
+	width: 140px;
+}
+
+.row-height {
+	height: 30px;
+}
+
+.div-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn {
+	width: 60px;
+	height: 18px;
+}
+
+.btn-add {
+	margin-left: 40px;
+}
+
+.btn-edit,
+.btn-del {
+	margin-left: 5px;
+	margin-right: 5px;
+}
 
   .hidden {
     display: none;
