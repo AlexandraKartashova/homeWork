@@ -47,8 +47,11 @@ const addRow = () => {
 	newCellIndTwo.appendChild(newTextIndTwo);
 	
 	let newCellIndThree = newRow.insertCell(3);
-	let divBtn = document.getElementById('div-btn');
+	const template = document.querySelector(".div-btn");
+    divBtn = template.cloneNode(true);
 	divBtn.classList.remove('hidden');
 	divBtn.className = 'div-btn';
 	newCellIndThree.appendChild(divBtn);
+
+	
 };
