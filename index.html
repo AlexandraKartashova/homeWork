@@ -19,7 +19,7 @@
         <button id="del">Delete</button>
     </div> -->
 
-    <table border="1" id="table">
+    <table border="1" id="table" class="table">
         <caption>Create ToDo list</caption>
         <tr>
          <th>Name Author</th>
@@ -29,13 +29,26 @@
 
         </tr>
         <tr>
-            <td><input type="text" id="name-author" placeholder="Name Author"></td>
-            <td><input type="date" id="date-created" placeholder="Date Created"> <br></td>
-            <td><input type="text" id="to-do" placeholder="To Do"></td>
-            <td><button id="add" class="btn-add btn">Add</button>
+            <td><input type="text" 
+                id="name-author" 
+                placeholder="Name Author" 
+                class="name-author input-field">
+            </td>
+            <td><input type="date" 
+                id="date-created" 
+                placeholder="Date Created" 
+                class="date-created input-field">
+            </td>
+            <td><input type="text"
+                id="to-do" 
+                placeholder="To Do" 
+                class="to-do input-field">
+            </td>
+            <td><button id="add" type = 'submit' class="btn-add btn">Add</button>
                 <div class="div-btn hidden" id="div-btn" >
-                    <button id="edit" class="btn-edit btn">Edit</button>
-                    <button id="del" class="btn-del btn">Delete</button>
+                    <button id="edit" class="btn-edit btn hidden">Edit</button>
+                    <button id="del"  class="btn-del btn hidden">Delete</button>
+                    <button id="save" class="btn-save btn hidden">Save</button>
                 </div>
             </td>
         </tr>
