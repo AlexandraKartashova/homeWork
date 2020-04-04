@@ -6,7 +6,9 @@
 	height: 30px;
 }
 
-.input-field {
+.input-field-head,
+.input-field,
+.input-row {
 	border: none;
 }
 

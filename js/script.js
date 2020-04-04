@@ -8,53 +8,26 @@ const randomColor = () => {
 	return color[i];
 };
 
-clearInput = () => {
+const clearInput = () => {
 	document.getElementById('name-author').value = "";
 	document.getElementById('date-created').value = "";
 	document.getElementById('to-do').value = "";
 };
-// let nameAuthor = '';
-// 	let date = '';
-// 	let toDo = '';
-
-	let inputNameAuthor = document.getElementById('name-author');
-	let inputDateCreated = document.getElementById('date-created');
-	let inputToDo = document.getElementById('to-do');
-
-add.onclick = () => {
-	let nameAuthor = inputNameAuthor.value;
-	let date = inputDateCreated.value;
-	let toDo = inputToDo.value;
-	
-	if(nameAuthor && date && toDo) {
-		todoList.push({
-		nameAuthor: nameAuthor,
-		dateCreated: date,
-		toDo: toDo,
-		// color: randomColor(),
-		id: Date.now(),
-		checked: false
-		});
-		addRow('table');
-		// clearyRender();
-		} else alert('Input all filds');
-		console.log('todoList', todoList);
-		clearInput();
-};
 
 const addRow = () => {
-	let tableRef = document.getElementById('table');
+	let tableRef = document.getElementById('create-table');
 	let newRow = tableRef.insertRow(-1);
-	newRow.classList = 'row-height';
+	newRow.classList = 'input-row';
 
 	let inputNameAuthor = document.createElement('input');
 	inputNameAuthor.value = document.getElementById('name-author').value;
 	inputNameAuthor.type = 'text';
+	// inputNameAuthor.disabled = 'true';
 	inputNameAuthor.className = 'input-field';
-	// inputNameAuthor.disabled = 'condition';
 	inputNameAuthor.setAttribute('disabled', '');
 	let newCell = newRow.insertCell(0);
 	newCell.appendChild(inputNameAuthor);
+	// console.log('nameAuthor', inputNameAuthor);
 
 	let inputDateCreated = document.createElement('input');
 	inputDateCreated.value = document.getElementById('date-created').value;
@@ -90,31 +63,25 @@ const addRow = () => {
 
 	newCellIndThree.appendChild(btnEdit);
 	newCellIndThree.appendChild(btnDel);
-	};
+};
 
-editToDo = () => {
+const showTodo = (todoList) => {
+	todoList.forEach(item => addRow(item));
+};
+
+const editToDo = () => {
 	condition = !condition;
 	console.log('before', condition);
+	
 	if(condition) {
 		console.log(condition);
-		inputNameAuthor.removeAttribute('disabled', '');
-		inputDateCreated.removeAttribute('disabled');
-		inputToDo.removeAttribute('disabled', '');
 		document.getElementById('btn-edit').innerHTML='Save';
-
 	} else {
-		console.log(condition);
-		inputNameAuthor.setAttribute('disabled', '');
-		inputDateCreated.setAttribute('disabled', '');
-		inputToDo.setAttribute('disabled', '');
-
 		document.getElementById('btn-edit').innerHTML='Edit';
-		
 	}
 };
 
-
-delToDo = () => {
+const delToDo = () => {
 	condition = !condition;
 
 	if(condition) {
@@ -124,8 +91,35 @@ delToDo = () => {
 	}
 };
 
+const clearyRender = () => {
+	const list = document.getElementById('create-table');
+	list.innerHTML = '';
+	// console.log('list1', list);
+};
 
-// const clearyRender = () => {
-// const list = document.querySelector(".cleary");
-// list.innerHTML = '';
-// };
+add.onclick = () => {
+	let nameAuthor = document.getElementById('name-author').value;
+	let date = document.getElementById('date-created').value;
+	let toDo = document.getElementById('to-do').value;
+
+	console.log('nameAuthor', nameAuthor);
+	console.log('date', date);
+	console.log('toDo', toDo);
+
+	if(nameAuthor && date && toDo) {
+		todoList.push({
+		nameAuthor: nameAuthor,
+		dateCreated: date,
+		toDo: toDo,
+		// color: randomColor(),
+		id: Date.now(),
+		checked: false
+		});
+		clearyRender();
+		showTodo(todoList);
+		} 
+		
+		// else alert('Input all filds');
+		console.log('todoList', todoList);
+		clearInput();
+};
