@@ -1,12 +1,7 @@
 /*jshint esversion: 6 */
 let todoList = [];
-const color = ['red', 'pink', 'green', 'yellow', 'blue', 'lightblue']; // рандомные цвета
-let condition = false;
-
-const randomColor = () => {
-	const i = Math.round(Math.random() * 6);
-	return color[i];
-};
+const parentTable = document.getElementById('table-head');
+const parentElement = document.getElementById('div-for-table');
 
 const clearInput = () => {
 	document.getElementById('name-author').value = "";
@@ -14,112 +9,75 @@ const clearInput = () => {
 	document.getElementById('to-do').value = "";
 };
 
-const addRow = () => {
-	let tableRef = document.getElementById('create-table');
-	let newRow = tableRef.insertRow(-1);
-	newRow.classList = 'input-row';
+const newTable = (todoList) => {
+		const lastTable = document.getElementById('table-new');
+		if(lastTable !== null) {
+		lastTable.parentNode.removeChild(lastTable);
+		}
+		
+		const newTable = document.createElement('table');
+		newTable.border = '1';
+		newTable.id = 'table-new';
 
-	let inputNameAuthor = document.createElement('input');
-	inputNameAuthor.value = document.getElementById('name-author').value;
-	inputNameAuthor.type = 'text';
-	// inputNameAuthor.disabled = 'true';
-	inputNameAuthor.className = 'input-field';
-	inputNameAuthor.setAttribute('disabled', '');
-	let newCell = newRow.insertCell(0);
-	newCell.appendChild(inputNameAuthor);
-	// console.log('nameAuthor', inputNameAuthor);
-
-	let inputDateCreated = document.createElement('input');
-	inputDateCreated.value = document.getElementById('date-created').value;
-	inputDateCreated.type = 'data';
-	inputDateCreated.className = 'input-field';
-	inputDateCreated.setAttribute('disabled', '');
-	let newCellIndOne = newRow.insertCell(1);
-	newCellIndOne.appendChild(inputDateCreated);
-
-	let inputToDo = document.createElement('input');
-	inputToDo.value =document.getElementById('to-do').value;
-	inputToDo.type = 'text';
-	inputToDo.className = 'input-field';
-	inputToDo.setAttribute('disabled', '');
-	let newCellIndTwo = newRow.insertCell(2);
-	newCellIndTwo.appendChild(inputToDo);
-
-	let newCellIndThree = newRow.insertCell(3);
-
-	let btnEdit = document.createElement('button');
-	btnEdit.type = 'button';
-	btnEdit.id = 'btn-edit';
-	btnEdit.innerText = 'Edit';
-	btnEdit.className = 'btn';
-	btnEdit.setAttribute('onclick', 'editToDo()');
-
-	let btnDel = document.createElement('button');
-	btnDel.type = 'button';
-	btnDel.id = 'btn-del';
-	btnDel.innerText = 'Del';
-	btnDel.className = 'btn';
-	btnDel.setAttribute('onclick', 'delToDo()');
-
-	newCellIndThree.appendChild(btnEdit);
-	newCellIndThree.appendChild(btnDel);
-};
-
-const showTodo = (todoList) => {
-	todoList.forEach(item => addRow(item));
-};
-
-const editToDo = () => {
-	condition = !condition;
-	console.log('before', condition);
+		for(let i = 0; i < todoList.length; i++) {
+			const tr = document.createElement('tr');
+			tr.id = i;
 	
-	if(condition) {
-		console.log(condition);
-		document.getElementById('btn-edit').innerHTML='Save';
-	} else {
-		document.getElementById('btn-edit').innerHTML='Edit';
-	}
-};
+			const td = document.createElement('td');
+			const inputNameAuthor = document.createElement('input');
+			inputNameAuthor.className = 'input-field';
+			inputNameAuthor.value = todoList[i].nameAuthor;
+			td.appendChild(inputNameAuthor);
 
-const delToDo = () => {
-	condition = !condition;
+			const inputDateCreated = document.createElement('input');
+			inputDateCreated.className = 'input-field';
+			inputDateCreated.value = todoList[i].dateCreated;
+			td.appendChild(inputDateCreated);	
 
-	if(condition) {
-		document.getElementById('btn-del').innerHTML='Back';
-	} else {
-		document.getElementById('btn-del').innerHTML='Del';
-	}
-};
+			const inputToDo = document.createElement('input');
+			inputToDo.className = 'input-field';
+			inputToDo.value = todoList[i].toDo;
+			td.appendChild(inputToDo);	
 
-const clearyRender = () => {
-	const list = document.getElementById('create-table');
-	list.innerHTML = '';
-	// console.log('list1', list);
+			const btnEdit = document.createElement('button');
+			btnEdit.className = 'btn';
+			btnEdit.innerText = 'Edit';
+
+			const btnDel = document.createElement('button');
+			btnDel.className = 'btn';
+			btnDel.innerText = 'Delete';
+
+			td.appendChild(btnEdit);
+			td.appendChild(btnDel);
+
+			tr.appendChild(td);
+
+			newTable.appendChild(tr);
+		}
+		parentTable.insertAdjacentElement('afterend', newTable);
 };
+	
 
 add.onclick = () => {
 	let nameAuthor = document.getElementById('name-author').value;
 	let date = document.getElementById('date-created').value;
 	let toDo = document.getElementById('to-do').value;
 
-	console.log('nameAuthor', nameAuthor);
-	console.log('date', date);
-	console.log('toDo', toDo);
+	// console.log('nameAuthor', nameAuthor);
+	// console.log('date', date);
+	// console.log('toDo', toDo);
 
 	if(nameAuthor && date && toDo) {
 		todoList.push({
 		nameAuthor: nameAuthor,
 		dateCreated: date,
 		toDo: toDo,
-		// color: randomColor(),
 		id: Date.now(),
 		checked: false
 		});
-		clearyRender();
-		showTodo(todoList);
-		} 
-		
-		// else alert('Input all filds');
+		newTable(todoList);
+	} 
+		else alert('Input all filds');
 		console.log('todoList', todoList);
 		clearInput();
 };
