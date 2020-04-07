@@ -1,5 +1,8 @@
 /*jshint esversion: 6 */
-let todoList = [];
+const todoList = [];
+let condition = false;
+let condition1 = false;
+let conditionDel = false;
 const parentTable = document.getElementById('table-head');
 const parentElement = document.getElementById('div-for-table');
 
@@ -18,34 +21,53 @@ const newTable = (todoList) => {
 		const newTable = document.createElement('table');
 		newTable.border = '1';
 		newTable.id = 'table-new';
+		// newTable.border = '1';
 
 		for(let i = 0; i < todoList.length; i++) {
 			const tr = document.createElement('tr');
 			tr.id = i;
-	
+
 			const td = document.createElement('td');
 			const inputNameAuthor = document.createElement('input');
 			inputNameAuthor.className = 'input-field';
 			inputNameAuthor.value = todoList[i].nameAuthor;
+			inputNameAuthor.setAttribute('disabled', '');
 			td.appendChild(inputNameAuthor);
 
 			const inputDateCreated = document.createElement('input');
+			inputDateCreated.type = 'date';
 			inputDateCreated.className = 'input-field';
 			inputDateCreated.value = todoList[i].dateCreated;
+			inputDateCreated.setAttribute('disabled', '');
 			td.appendChild(inputDateCreated);	
 
 			const inputToDo = document.createElement('input');
 			inputToDo.className = 'input-field';
 			inputToDo.value = todoList[i].toDo;
+			inputToDo.setAttribute('disabled', '');
 			td.appendChild(inputToDo);	
 
 			const btnEdit = document.createElement('button');
 			btnEdit.className = 'btn';
+			btnEdit.id = i;
 			btnEdit.innerText = 'Edit';
+			btnEdit.onclick = function() {editTodo(btnEdit,
+				btnDel, 
+				tr, 
+				inputNameAuthor, 
+				inputDateCreated, 
+				inputToDo)};
 
 			const btnDel = document.createElement('button');
 			btnDel.className = 'btn';
+			btnDel.id = 'del';
 			btnDel.innerText = 'Delete';
+			btnDel.onclick = function() {delTodo(btnEdit, 
+				btnDel, 
+				tr,
+				inputNameAuthor, 
+				inputDateCreated, 
+				inputToDo)};
 
 			td.appendChild(btnEdit);
 			td.appendChild(btnDel);
@@ -56,7 +78,69 @@ const newTable = (todoList) => {
 		}
 		parentTable.insertAdjacentElement('afterend', newTable);
 };
-	
+ function editTodo(btnEdit, 
+	btnDel, 
+	tr, 
+	inputNameAuthor, 
+	inputDateCreated, 
+	inputToDo) {
+
+	condition = !condition;
+	conditionDel = !conditionDel;
+	const i = tr.id;
+
+	if(condition) {
+		inputNameAuthor.removeAttribute('disabled', '');
+		inputDateCreated.removeAttribute('disabled', '');
+		inputToDo.removeAttribute('disabled', '');
+		btnEdit.innerHTML='Save';
+		btnDel.innerHTML='Back';
+
+	} else {
+		todoList[i].nameAuthor = inputNameAuthor.value;
+		todoList[i].dateCreated = inputDateCreated.value;
+		todoList[i].toDo = inputToDo.value;
+
+		inputNameAuthor.setAttribute('disabled', '');
+		inputDateCreated.setAttribute('disabled', '');
+		inputToDo.setAttribute('disabled', '');
+		btnEdit.innerHTML='Edit';
+		btnDel.innerHTML='Delete';
+		console.log('after edit', todoList);
+	}
+}
+
+function delTodo(btnEdit, 
+	btnDel, 
+	tr,
+	inputNameAuthor, 
+	inputDateCreated, 
+	inputToDo) { 
+
+	const i = tr.id;
+	condition1 = !condition1;
+	if(condition1) {
+		todoList.splice(i,1);
+		console.log('after del', todoList);
+	}
+
+	if(conditionDel) {
+		inputNameAuthor.value = todoList[i].nameAuthor;
+		inputDateCreated.value = todoList[i].dateCreated;
+		inputToDo.value = todoList[i].toDo;
+
+		inputNameAuthor.setAttribute('disabled', '');
+		inputDateCreated.setAttribute('disabled', '');
+		inputToDo.setAttribute('disabled', '');
+
+		btnEdit.innerHTML='Edit';
+		btnDel.innerHTML='Delete';
+
+		console.log('back', todoList);	
+		conditionDel = !conditionDel;
+	} 	
+	newTable(todoList);
+}
 
 add.onclick = () => {
 	let nameAuthor = document.getElementById('name-author').value;
