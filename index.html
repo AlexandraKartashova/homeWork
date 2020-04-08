@@ -10,11 +10,22 @@
         <table border="1" id="table-head" class="table">
             <caption>Create ToDo list</caption>
             <tr>
-            <th>Name Author</th>
-            <th>Date Created</th>
-            <th>To Do</th>
-            <th class="click">Click</th>
-
+                <th>Name Author
+                    <button type="submit" 
+                    id="sort-authors" 
+                    onclick="sortFields('nameAuthor')">Sort</button>
+                </th>
+                <th>Date Created
+                    <button type="submit" 
+                    id="sort-date" 
+                    onclick="sortFields('dateCreated')">Sort</button>
+                </th>
+                <th>To Do
+                    <button type="submit" 
+                    id="sort-to-do" 
+                    onclick="sortFields('toDo')">Sort</button>
+                </th>
+                <th class="click">Click</th>
             </tr>
             <tr>
                 <td><input type="text" 
@@ -32,7 +43,7 @@
                     placeholder="To Do" 
                     class="to-do input-field-head">
                 </td>
-                <td><button id="add" type = 'submit' class="btn-add btn">Add</button>
+                <td><button id="add" type = "submit" class="btn-add btn">Add</button>
                     <div class="div-btn hidden" id="div-btn" >
                         <button id="edit" class="btn-edit btn hidden">Edit</button>
                         <button id="del"  class="btn-del btn hidden">Delete</button>

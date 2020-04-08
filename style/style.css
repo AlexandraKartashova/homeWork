@@ -2,14 +2,19 @@
 	width: 140px;
 }
 
-.row-height {
-	height: 30px;
+.table-new {
+	width: 647px;
 }
 
 .input-field-head,
 .input-field,
 .input-row {
 	border: none;
+}
+
+.input-field {
+	margin-right: 4px;
+	margin-left: 1px;
 }
 
 .div-btn {
@@ -20,11 +25,11 @@
 
 .btn,
 .btn-save {
-	margin-left: 5px;
-	margin-right: 5px;
+	margin-left: 9px;
+    margin-top: 4px;
+	margin-bottom: 4px;
 	width: 60px;
 	height: 18px;
-	color: red;
 }
 
 .btn-save {
@@ -35,14 +40,21 @@
 
 .btn-add {
 	margin-left: 40px;
+	color: red;
 }
 
   .hidden {
     display: none;
 }
 
+.input-back-color {
+	margin-right: 4px;
+	margin-left: 1px;
+	background-color: rgb(197, 193, 193);
+	border: none;
+}
 
-
-/* ::ng-deep input:disabled {
-	background-color: white !important; 
-} */
+input:disabled {
+    color: black;
+   	background-color: white;
+}

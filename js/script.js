@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 const todoList = [];
 let condition = false;
+let sorting = false; 
 
 const parentTable = document.getElementById('table-head');
 const parentElement = document.getElementById('div-for-table');
@@ -20,6 +21,7 @@ const newTable = (todoList) => {
 		const newTable = document.createElement('table');
 		newTable.border = '1';
 		newTable.id = 'table-new';
+		newTable.className = 'table-new';
 		// newTable.border = '1';
 
 		for(let i = 0; i < todoList.length; i++) {
@@ -95,6 +97,10 @@ const newTable = (todoList) => {
 		btnEdit.innerHTML='Save';
 		btnDel.innerHTML='Back';
 
+		inputNameAuthor.className = 'input-back-color';
+		inputDateCreated.className = 'input-back-color';
+		inputToDo.className = 'input-back-color';
+
 	} else {
 		todoList[i].nameAuthor = inputNameAuthor.value;
 		todoList[i].dateCreated = inputDateCreated.value;
@@ -141,22 +147,26 @@ function delTodo(btnEdit,
 	newTable(todoList);
 }
 
-let arrAuthorForSort = [];
-const getSortTodo = (todoList) => {
-
-	// const tableForSort = document.getElementById('table-new')[0];
-	// const rows = [];
-
-	// for(let i = 0; tableForSort.children.length - 1; i >=0 ) {
-
-	// }
-
-
-	for(let i = 0; i < todoList.length; i++) {
-		arrAuthorForSort.push(todoList[i].nameAuthor);
-		console.log('arrAuthorForSort', arrAuthorForSort);
-		console.log('todoList.nameAuthor', todoList[i].nameAuthor);
+sortFields = (title) => {
+	sorting = !sorting;
+	switch (title) {
+		case 'nameAuthor' :
+			sorting 
+			? todoList.sort((a, b) => a.nameAuthor > b.nameAuthor ? 1 : -1) 
+			: todoList.sort((a, b) => a.nameAuthor < b.nameAuthor ? 1 : -1);
+			break;
+		case 'dateCreated' :
+			sorting 
+			? todoList.sort((a, b) => a.dateCreated > b.dateCreated ? 1 : -1) 
+			: todoList.sort((a, b) => a.dateCreated < b.dateCreated ? 1 : -1);
+			break;
+		case 'toDo' :
+			sorting 
+			? todoList.sort((a, b) => a.toDo > b.toDo ? 1 : -1) 
+			: todoList.sort((a, b) => a.toDo < b.toDo ? 1 : -1);
+			break;
 	}
+	newTable(todoList);
 };
 
 add.onclick = () => {
@@ -172,16 +182,11 @@ add.onclick = () => {
 		todoList.push({
 		nameAuthor: nameAuthor,
 		dateCreated: date,
-		toDo: toDo,
-		id: Date.now(),
-		checked: false
+		toDo: toDo
 		});
 		newTable(todoList);
 	} 
 		else alert('Input all filds');
 		console.log('todoList', todoList);
 		clearInput();
-
-		getSortTodo(todoList);
-		console.log('arrAuthorForSort', arrAuthorForSort);
 };
