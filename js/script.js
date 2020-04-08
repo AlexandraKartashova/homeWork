@@ -1,8 +1,7 @@
 /*jshint esversion: 6 */
 const todoList = [];
 let condition = false;
-let condition1 = false;
-let conditionDel = false;
+
 const parentTable = document.getElementById('table-head');
 const parentElement = document.getElementById('div-for-table');
 
@@ -78,6 +77,7 @@ const newTable = (todoList) => {
 		}
 		parentTable.insertAdjacentElement('afterend', newTable);
 };
+
  function editTodo(btnEdit, 
 	btnDel, 
 	tr, 
@@ -86,7 +86,6 @@ const newTable = (todoList) => {
 	inputToDo) {
 
 	condition = !condition;
-	conditionDel = !conditionDel;
 	const i = tr.id;
 
 	if(condition) {
@@ -118,13 +117,9 @@ function delTodo(btnEdit,
 	inputToDo) { 
 
 	const i = tr.id;
-	condition1 = !condition1;
-	if(condition1) {
-		todoList.splice(i,1);
-		console.log('after del', todoList);
-	}
+	condition = !condition;
 
-	if(conditionDel) {
+	if(!condition) {
 		inputNameAuthor.value = todoList[i].nameAuthor;
 		inputDateCreated.value = todoList[i].dateCreated;
 		inputToDo.value = todoList[i].toDo;
@@ -137,10 +132,32 @@ function delTodo(btnEdit,
 		btnDel.innerHTML='Delete';
 
 		console.log('back', todoList);	
-		conditionDel = !conditionDel;
-	} 	
+	} else {
+		todoList.splice(i,1);
+		condition = !condition;
+		console.log('after del', todoList);
+	}
+
 	newTable(todoList);
 }
+
+let arrAuthorForSort = [];
+const getSortTodo = (todoList) => {
+
+	// const tableForSort = document.getElementById('table-new')[0];
+	// const rows = [];
+
+	// for(let i = 0; tableForSort.children.length - 1; i >=0 ) {
+
+	// }
+
+
+	for(let i = 0; i < todoList.length; i++) {
+		arrAuthorForSort.push(todoList[i].nameAuthor);
+		console.log('arrAuthorForSort', arrAuthorForSort);
+		console.log('todoList.nameAuthor', todoList[i].nameAuthor);
+	}
+};
 
 add.onclick = () => {
 	let nameAuthor = document.getElementById('name-author').value;
@@ -164,4 +181,7 @@ add.onclick = () => {
 		else alert('Input all filds');
 		console.log('todoList', todoList);
 		clearInput();
+
+		getSortTodo(todoList);
+		console.log('arrAuthorForSort', arrAuthorForSort);
 };
