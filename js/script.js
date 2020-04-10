@@ -167,54 +167,45 @@ sortFields = (title) => {
 
 const select = document.querySelector('select');
 const inputForFilter = document.getElementById('search');
-let arr = [];
 
-serchWithSelect = () => {
-	const filterValue = inputForFilter.value;
-	console.log('work1', filterValue);
+
+inputForFilter.oninput = function () {
+	let arr = [];
+	const filterValue = inputForFilter.value.toLowerCase().trim();
+
+	document.getElementById('result').innerHTML = filterValue;
+	let newValue = '';
+	// if(select.value === 'none') {
+	// 	todoList.filter = filterValue;
+	// 	newTable(todoList);
+	// }
 
 	if(filterValue !== '') {
-		console.log('fegerger');
 		todoList.forEach(item => {
-			let value = '';
-			
 			switch(select.value) {
-				// case 'none':
-				// console.log('none');
-				// break;
 				case 'Author':
-					value = item.nameAuthor;
-					// console.log('Author');
-					console.log('Author', value);
-					break;
-				case 'Date Created':
-					value = item.dateCreated;
-					console.log('Date Created');
-					console.log('date', value);
+					newValue = item.nameAuthor;
 					break;
 				case 'To Do':
-					value= item.toDo;
-					console.log('To Do');
-					console.log('to', value);
+					newValue= item.toDo;
 					break;
+				default: console.log('dfgdfg');
+				break;
 			}
-			let comp = value.slice(item, filterValue.length).toLowerCase();
-			if(comp === filterValue) {
+			let compare = newValue.slice(item, filterValue.length).toLowerCase();
+			if(compare === filterValue) {
 				arr.push(item);
+				console.log('arr', arr);
 			}
 		});
 	} else arr = todoList;
-	newTable(todoList);
+	newTable(arr);
 };
 
 add.onclick = () => {
-	let nameAuthor = document.getElementById('name-author').value;
-	let date = document.getElementById('date-created').value;
-	let toDo = document.getElementById('to-do').value;
-
-	// console.log('nameAuthor', nameAuthor);
-	// console.log('date', date);
-	// console.log('toDo', toDo);
+	let nameAuthor = document.getElementById('name-author').value.trim();
+	let date = document.getElementById('date-created').value.trim();
+	let toDo = document.getElementById('to-do').value.trim();
 
 	if(nameAuthor && date && toDo) {
 		todoList.push({

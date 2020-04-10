@@ -13,14 +13,14 @@
                 class="search"
                 (onkeyup)="serchWithSelect()">
 
-            <button class="btn-search" onclick="serchWithSelect()">Search</button>
-
             <select id="select" class="select" aria-placeholder="select option">
                 <option value="none"> </option>
                 <option value="Author">Author</option>
-                <option value="Date Created">Date Created</option>
                 <option value="To Do">To Do</option>
             </select>
+            <br>
+            oninput:
+           <span id="result"></span>
     </div>
     <div class="div-for-table" id="div-for-table">
         <table border="1" id="table-head" class="table">
