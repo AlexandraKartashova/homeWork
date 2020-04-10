@@ -165,24 +165,22 @@ sortFields = (title) => {
 	newTable(todoList);
 };
 
-const select = document.querySelector('select');
+const select = document.querySelectorAll('#select').innerHTML;
 const inputForFilter = document.getElementById('search');
 
-
+let x = document.getElementById('select').value;
+console.log('x', x);
 inputForFilter.oninput = function () {
+	console.log('select', select);
 	let arr = [];
 	const filterValue = inputForFilter.value.toLowerCase().trim();
 
 	document.getElementById('result').innerHTML = filterValue;
 	let newValue = '';
-	// if(select.value === 'none') {
-	// 	todoList.filter = filterValue;
-	// 	newTable(todoList);
-	// }
-
+	let newValue1 = '';
 	if(filterValue !== '') {
 		todoList.forEach(item => {
-			switch(select.value) {
+			switch(x) {
 				case 'Author':
 					newValue = item.nameAuthor;
 					break;
@@ -190,10 +188,13 @@ inputForFilter.oninput = function () {
 					newValue= item.toDo;
 					break;
 				default: console.log('dfgdfg');
+					newValue = item.nameAuthor;
+					newValue1 = item.toDo;
 				break;
 			}
 			let compare = newValue.slice(item, filterValue.length).toLowerCase();
-			if(compare === filterValue) {
+			let compare1 = newValue1.slice(item, filterValue.length).toLowerCase();
+			if(compare === filterValue || compare1 === filterValue) {
 				arr.push(item);
 				console.log('arr', arr);
 			}
@@ -201,6 +202,7 @@ inputForFilter.oninput = function () {
 	} else arr = todoList;
 	newTable(arr);
 };
+
 
 add.onclick = () => {
 	let nameAuthor = document.getElementById('name-author').value.trim();
