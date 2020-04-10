@@ -2,7 +2,8 @@
 	width: 140px;
 }
 
-.table-new {
+.table-new,
+.table {
 	width: 647px;
 }
 
@@ -12,30 +13,52 @@
 	border: none;
 }
 
+.div-search {
+	width: 100%;
+margin-left: 150px;	
+}
+
+.div-for-table {
+	margin-top: 20px;
+}
+
+.title-table {
+	margin-bottom: 20px;
+}
+
+.search {
+	width: 200px;
+	height: 25px;
+	border: black 1px solid;
+}
+
+.select {
+	height: 28px;
+	width: 160px;
+	border: none;
+	border-bottom: black 1px solid;
+}
+
 .input-field {
-	margin-right: 4px;
+	margin-right: 12px;
 	margin-left: 1px;
+	background-color: rgb(202, 198, 198);
 }
 
-.div-btn {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.btn,
-.btn-save {
+.btn {
 	margin-left: 9px;
-    margin-top: 4px;
+	margin-top: 4px;
 	margin-bottom: 4px;
 	width: 60px;
 	height: 18px;
 }
 
-.btn-save {
-	background-color: green;
-	margin-top: 5px;
-	margin-left: 40px;
+.btn-search {
+	margin: -70px;
+	padding-top: 0px;
+	margin-right: 10px;
+	width: 60px;
+	height: 18px;
 }
 
 .btn-add {
@@ -43,18 +66,14 @@
 	color: red;
 }
 
-  .hidden {
-    display: none;
-}
-
 .input-back-color {
-	margin-right: 4px;
+	margin-right: 12px;
 	margin-left: 1px;
 	background-color: rgb(197, 193, 193);
 	border: none;
 }
 
 input:disabled {
-    color: black;
-   	background-color: white;
+	color: black;
+	background-color: white;
 }

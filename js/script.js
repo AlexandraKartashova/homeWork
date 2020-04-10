@@ -97,10 +97,6 @@ const newTable = (todoList) => {
 		btnEdit.innerHTML='Save';
 		btnDel.innerHTML='Back';
 
-		inputNameAuthor.className = 'input-back-color';
-		inputDateCreated.className = 'input-back-color';
-		inputToDo.className = 'input-back-color';
-
 	} else {
 		todoList[i].nameAuthor = inputNameAuthor.value;
 		todoList[i].dateCreated = inputDateCreated.value;
@@ -166,6 +162,48 @@ sortFields = (title) => {
 			: todoList.sort((a, b) => a.toDo < b.toDo ? 1 : -1);
 			break;
 	}
+	newTable(todoList);
+};
+
+const select = document.querySelector('select');
+const inputForFilter = document.getElementById('search');
+let arr = [];
+
+serchWithSelect = () => {
+	const filterValue = inputForFilter.value;
+	console.log('work1', filterValue);
+
+	if(filterValue !== '') {
+		console.log('fegerger');
+		todoList.forEach(item => {
+			let value = '';
+			
+			switch(select.value) {
+				// case 'none':
+				// console.log('none');
+				// break;
+				case 'Author':
+					value = item.nameAuthor;
+					// console.log('Author');
+					console.log('Author', value);
+					break;
+				case 'Date Created':
+					value = item.dateCreated;
+					console.log('Date Created');
+					console.log('date', value);
+					break;
+				case 'To Do':
+					value= item.toDo;
+					console.log('To Do');
+					console.log('to', value);
+					break;
+			}
+			let comp = value.slice(item, filterValue.length).toLowerCase();
+			if(comp === filterValue) {
+				arr.push(item);
+			}
+		});
+	} else arr = todoList;
 	newTable(todoList);
 };
 
