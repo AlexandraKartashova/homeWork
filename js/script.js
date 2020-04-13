@@ -172,7 +172,6 @@ inputForFilter.oninput = function () {
 	let arr = [];
 	const filterValue = inputForFilter.value.toLowerCase().trim();
 
-	document.getElementById('result').innerHTML = filterValue;
 	let newValue = '';
 	let newValue1 = '';
 	if(filterValue !== '') {
@@ -188,24 +187,23 @@ inputForFilter.oninput = function () {
 					newValue = item.nameAuthor + ' ' + item.toDo;
 					break;
 			}
-		let words = newValue.split(' ');
-		let compare = '';
-			for(let i = 0; i < words.length; i++) {
-				compare = words[i].slice(item, filterValue.length).toLowerCase();
-				if(compare == filterValue ) {
-					if(!arr.includes(item)) {				
-						arr.push(item);
-						console.log('arr', arr);
+			let words = newValue.split(' ');
+			let compare = '';
+				for(let i = 0; i < words.length; i++) {
+					compare = words[i].slice(item, filterValue.length).toLowerCase();
+					if(compare == filterValue ) {
+						if(!arr.includes(item)) {				
+							arr.push(item);
+							console.log('arr', arr);
+						}
 					}
+	
 				}
-
-			}
-
-		});
+	
+			});
 	} else arr = todoList;
 	newTable(arr);
 };
-
 
 
 add.onclick = () => {
