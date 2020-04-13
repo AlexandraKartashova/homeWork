@@ -165,13 +165,10 @@ sortFields = (title) => {
 	newTable(todoList);
 };
 
-const select = document.querySelectorAll('#select').innerHTML;
+const select = document.querySelector('select');
 const inputForFilter = document.getElementById('search');
 
-let x = document.getElementById('select').value;
-console.log('x', x);
 inputForFilter.oninput = function () {
-	console.log('select', select);
 	let arr = [];
 	const filterValue = inputForFilter.value.toLowerCase().trim();
 
@@ -180,28 +177,35 @@ inputForFilter.oninput = function () {
 	let newValue1 = '';
 	if(filterValue !== '') {
 		todoList.forEach(item => {
-			switch(x) {
+			switch(select.value) {
 				case 'Author':
 					newValue = item.nameAuthor;
 					break;
 				case 'To Do':
 					newValue= item.toDo;
 					break;
-				default: console.log('dfgdfg');
-					newValue = item.nameAuthor;
-					newValue1 = item.toDo;
-				break;
+				case 'none': 
+					newValue = item.nameAuthor + ' ' + item.toDo;
+					break;
 			}
-			let compare = newValue.slice(item, filterValue.length).toLowerCase();
-			let compare1 = newValue1.slice(item, filterValue.length).toLowerCase();
-			if(compare === filterValue || compare1 === filterValue) {
-				arr.push(item);
-				console.log('arr', arr);
+		let words = newValue.split(' ');
+		let compare = '';
+			for(let i = 0; i < words.length; i++) {
+				compare = words[i].slice(item, filterValue.length).toLowerCase();
+				if(compare == filterValue ) {
+					if(!arr.includes(item)) {				
+						arr.push(item);
+						console.log('arr', arr);
+					}
+				}
+
 			}
+
 		});
 	} else arr = todoList;
 	newTable(arr);
 };
+
 
 
 add.onclick = () => {
